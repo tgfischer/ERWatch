@@ -146,13 +146,13 @@
           if (res.err) {
             $('#error-modal').openModal({
               complete: function() {
-                window.location.href = "/dashboard";
+                window.location.reload();
               }
             });
           } else {
             $('#success-modal').openModal({
               complete: function() {
-                window.location.href = "/dashboard";
+                window.location.reload();
               }
             });
           }

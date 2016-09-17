@@ -5,36 +5,18 @@ var Visit = require('../models/visit');
 var Utils = {
 
   getQueue: function(next) {
-    this.getVisitsBeingTreated(function(err, visitsBeingTreated) {
+    var _this = this;
+
+    Visit.where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
       if (err) {
         return next(err);
       }
 
-      Visit.where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
-        if (err) {
-          return next(err);
-        }
-
-        visits = visits.sort(function(a, b) {
-          return a.condition.severity < b.condition.severity;
-        });
-
-        if (visitsBeingTreated.length === 0 && visits.length > 0) {
-          visits[0].admitTime = Date.now();
-
-          Visit.update({ _id: visits[0]._id }, { admitTime: Date.now() }, function(err, visit) {
-            if (err) {
-              return next(err);
-            }
-
-            visits[0] = visit;
-
-            return next(null, visits);
-          });
-        } else {
-          return next(null, visits);
-        }
+      visits = visits.sort(function(a, b) {
+        return a.condition.severity < b.condition.severity;
       });
+
+      return next(null, visits);
     });
   },
 
@@ -134,12 +116,35 @@ var Utils = {
   },
 
   markPatientAsTreated: function(code, next) {
+    var _this = this;
     Visit.update({ code: code }, { resolutionTime: Date.now() },  function(err) {
       if (err) {
         return next(err);
       }
 
-      return next();
+      _this.getVisitsBeingTreated(function(err, visitsBeingTreated) {
+        if (err) {
+          next(err);
+        }
+
+        _this.getQueue(function(err, queue) {
+          if (err) {
+            next(err);
+          }
+
+          if (visitsBeingTreated.length === 0 && queue.length > 0) {
+            Visit.update({ _id: queue[0]._id }, { admitTime: Date.now() }, function(err) {
+              if (err) {
+                return next(err);
+              }
+
+              return next();
+            });
+          } else {
+            return next();
+          }
+        });
+      });
     });
   }
 

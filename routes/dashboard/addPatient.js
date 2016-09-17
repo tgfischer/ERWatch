@@ -31,12 +31,10 @@ router.post('/', Auth.isLoggedIn, function(req, res, next) {
       if (!condition) {
         condition = new Condition();
         condition.name = req.body.conditionName;
-        condition.waitTime = req.body.conditionWaitTime;
-        condition.severity = req.body.conditionSeverity;
+        condition.waitTime = parseFloat(req.body.conditionWaitTime);
+        condition.severity = parseFloat(req.body.conditionSeverity);
       } else {
-        console.log("Saved: " + condition.waitTime);
-        console.log("new: " + req.body.conditionWaitTime);
-        condition.waitTime = (condition.waitTime + req.body.conditionWaitTime) / 2
+        condition.waitTime = Math.round((condition.waitTime + parseFloat(req.body.conditionWaitTime)) / 2);
       }
 
       if (visitsBeingTreated.length === 0 || condition.severity > visitsBeingTreated[0].severity) {

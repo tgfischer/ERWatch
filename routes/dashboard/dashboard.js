@@ -24,7 +24,7 @@ router.get('/', Auth.isLoggedIn, function(req, res, next) {
           msg : "Uh oh, something went wrong! Please try again later."
         });
       }
-
+      
       res.render('dashboard/dashboard', {
         queue: queue,
         visitsBeingTreated: visitsBeingTreated
@@ -34,7 +34,6 @@ router.get('/', Auth.isLoggedIn, function(req, res, next) {
 });
 
 router.post('/mark_treated', Auth.isLoggedIn, function(req, res, next) {
-  console.log(req.body.code);
   Utils.markPatientAsTreated(req.body.code, function(err) {
     if (err) {
       console.log(JSON.stringify(err, null, 2));
