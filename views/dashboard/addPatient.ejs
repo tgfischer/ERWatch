@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Patient</title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <ul>
+      <% if (user) { %>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/logout">Log out</a></li>
+      <% } else { %>
+        <li><a href="/login">Log in</a></li>
+        <li><a href="/signup">Sign up</a></li>
+      <% } %>
+    </ul>
+
+    <form action="/dashboard/add-patient" method="POST">
+      <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
+      <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
+      <input class="healthCard" type="text" name="healthCard" placeholder="Health Card" /><br>
+      <select class="gender" name="gender">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select><br>
+      <input class="birthday" type="date" name="birthday" placeholder="Birthday" /><br>
+      <input class="conditionName" type="text" name="conditionName" placeholder="Condition Name" /><br>
+      <select class="severity" name="conditionSeverity">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select><br>
+      <input class="waitTime" type="number" name="conditionWaitTime" /><br>
+      <input class="submit" type="submit" />
+    </form>
+  </body>
+</html>

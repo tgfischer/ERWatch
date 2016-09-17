@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Dashboard</title>
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
     <ul>
       <% if (user) { %>
         <li><a href="/dashboard">Dashboard</a></li>
@@ -16,5 +14,9 @@
         <li><a href="/signup">Sign up</a></li>
       <% } %>
     </ul>
+
+    <p>
+      <a href="/dashboard/add-patient">Add Patient</a>
+    </p>
   </body>
 </html>

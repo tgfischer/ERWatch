@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var ConditionSchema = new Schema({
   name        : String,
-  category    : String,
   waitTime    : Number,
-  patients    : [{ Schema.Types.ObjectId, ref: 'Patient' }]
+  severity    : Number//,
+  // visits      : [{ type: Schema.Types.ObjectId, ref: 'Visit' }]
 }, {
   collections: 'conditions'
 });

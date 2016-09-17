@@ -4,9 +4,10 @@ var Schema = mongoose.Schema;
 var PatientSchema = new Schema({
   firstName   : String,
   lastName    : String,
-  severity    : Number,
-  code        : String,
-  condition   : { type: String, ref: 'Condition' }
+  gender      : String,
+  birthday    : Date,
+  healthCard  : String,
+  visits      : [{ type: Schema.Types.ObjectId, ref: 'Visit' }]
 }, {
   collection: 'patients'
 });
