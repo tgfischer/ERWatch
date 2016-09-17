@@ -6,7 +6,8 @@ var NurseSchema = new Schema({
   firstName : String,
   lastName  : String,
   email     : String,
-  password  : String
+  password  : String,
+  hospital  : { type: Schema.Types.ObjectId, ref: 'Hospital' }
 }, {
   collection : 'nurses'
 });

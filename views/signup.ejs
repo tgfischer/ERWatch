@@ -17,16 +17,85 @@
           <h5 class="header col s12 light">Sign Up</h5>
         </div>
         <div class="row">
+          <div class="col s12 l2"></div>
+          <form class="col s12 l8" action="/signup" method="POST">
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <label for="firstName">First Name</label>
+                <input id="firstName" name="firstName" type="text" class="validate">
+              </div>
+              <div class="input-field col s12 m6">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" name="lastName" type="text" class="validate">
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" class="validate">
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" class="validate">
+              </div>
+            </div>
 
-        </div>
-        <div class="row">
-          <form class ="col s4"></form>
-          <form class = "col s4"action="/signup" method="POST">
-            <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
-            <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
-            <input class="email" type="text" name="email" placeholder="Email" /><br>
-            <input class="password" type="password" name="password" placeholder="Password" /><br>
-            <input class="submit btn waves-effect waves-light red darken-1" type="submit" />
+            <% if (hospitals.length) { %>
+              <div class="row">
+                <div class="input-field col s12">
+                  <select name="hospital">
+                    <% hospitals.forEach(function(hospital, i) { %>
+                      <option value="hospital._id"><%= hospital.name %></option>
+                    <% }); %>
+                  </select>
+                </div>
+              </div>
+            <% } else { %>
+              <div class="row">
+                <div class="input-field col s12">
+                  <label for="hospitalName">Hospital Name</label>
+                  <input id="hospitalName" name="hospitalName" type="text" class="validate">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <label for="hospitalStreet">Street</label>
+                  <input id="hospitalStreet" name="hospitalStreet" type="text" class="validate">
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12 m4">
+                  <label for="hospitalCity">City</label>
+                  <input id="hospitalCity" name="hospitalCity" type="text" class="validate">
+                </div>
+                <div class="input-field col s12 m4">
+                  <label for="hospitalPostalCode">Postal Code</label>
+                  <input id="hospitalPostalCode" name="hospitalPostalCode" type="text" class="validate">
+                </div>
+                <div class="input-field col s12 m4">
+                  <select name="hospitalProvince">
+                    <option value="AB">Alberta</option>
+                    <option value="BC">British Columbia</option>
+                    <option value="MB">Manitoba</option>
+                    <option value="NB">New Brunswick</option>
+                    <option value="NL">Newfoundland and Labrador</option>
+                    <option value="NS">Nova Scotia</option>
+                    <option value="ON">Ontario</option>
+                    <option value="PE">Prince Edward Island</option>
+                    <option value="QC">Quebec</option>
+                    <option value="SK">Saskatchewan</option>
+                    <option value="NT">Northwest Territories</option>
+                    <option value="NU">Nunavut</option>
+                    <option value="YT">Yukon</option>
+                  </select>
+                </div>
+              </div>
+            <% } %>
+
+            <input class="submit btn red darken-1" type="submit" />
           </form>
 
         </div>
@@ -34,6 +103,13 @@
     </div>
   </div>
 
-
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('select').material_select();
+    Materialize.updateTextFields();
+  });
+  </script>
 </body>
 </html>
