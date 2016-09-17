@@ -30,7 +30,7 @@ var Utils = {
         return next("This patient is not currently being treated");
       }
 
-      return next(null, visit.waitTime - visit.getTimeDifference());
+      return next(null, visit.condition.getAvgWaitTime() - visit.getTimeDifference());
     });
   },
 
@@ -41,7 +41,7 @@ var Utils = {
       }
 
       async.each(visits, function(visit, callback) {
-        visit.timeUntilFinished = visit.condition.waitTime - visit.getTimeDifference();
+        visit.timeUntilFinished = visit.condition.getAvgWaitTime() - visit.getTimeDifference();
         callback();
       }, function(err) {
         if (err) {
@@ -56,11 +56,11 @@ var Utils = {
   getEstimatedWaitTime: function(code, next) {
     var _this = this;
 
-    Visit.where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
+    this.getQueue(function(err, visits) {
       if (err) {
         return next(err);
       }
-
+      
       var waitTime = 0;
       var visit;
 
@@ -70,7 +70,7 @@ var Utils = {
           break;
         }
 
-        waitTime += visits[i].condition.waitTime;
+        waitTime += visits[i].condition.getAvgWaitTime();
       }
 
       _this.getVisitsBeingTreated(function(err, visitsBeingTreated) {
@@ -79,10 +79,10 @@ var Utils = {
         }
 
         var treated = visitsBeingTreated.sort(function(a, b) {
-          return a.waitTime - a.getTimeDifference() < b.waitTime - b.getTimeDifference();
+          return a.condition.getAvgWaitTime() - a.getTimeDifference() < b.condition.getAvgWaitTime() - b.getTimeDifference();
         })[0];
 
-        waitTime += treated.condition.waitTime - treated.getTimeDifference();
+        waitTime += treated.condition.getAvgWaitTime() - treated.getTimeDifference();
 
         return next(null, {
           waitTime: waitTime,

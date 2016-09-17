@@ -85,7 +85,7 @@
                     Approximate wait time: <%= visit.totalWaitTime %> minutes
                   </p>
                   <p class="grey-text text-darken-1">
-                    Approximate time to treat patient: <%= visit.condition.waitTime %> minutes
+                    Approximate time to treat patient: <%= visit.condition.getAvgWaitTime() %> minutes
                   </p>
                 <% } else { %>
                   <p class="grey-text text-darken-1">
@@ -103,7 +103,7 @@
                 </p>
               </div>
               <div class="card-action">
-                <a href="#" class="mark-as-treated-btn" data-code="<%= visit.code %>">Mark as treated</a>
+                <a href="#" class="mark-as-treated-btn red-text" data-code="<%= visit.code %>">Remove</a>
               </div>
             </div>
           </div>

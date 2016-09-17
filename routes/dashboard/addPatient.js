@@ -12,7 +12,10 @@ router.get('/', Auth.isLoggedIn, function(req, res, next) {
 });
 
 router.post('/', Auth.isLoggedIn, function(req, res, next) {
-  Condition.findOne({ name: req.body.conditionName }, function(err, condition) {
+  Condition.findOne({
+    name: req.body.conditionName,
+    severity: req.body.conditionSeverity
+  }, function(err, condition) {
     if (err) {
       console.error(JSON.stringify(err, null, 2));
 
@@ -31,10 +34,10 @@ router.post('/', Auth.isLoggedIn, function(req, res, next) {
       if (!condition) {
         condition = new Condition();
         condition.name = req.body.conditionName;
-        condition.waitTime = parseFloat(req.body.conditionWaitTime);
+        condition.waitTime = [parseFloat(req.body.conditionWaitTime)];
         condition.severity = parseFloat(req.body.conditionSeverity);
       } else {
-        condition.waitTime = Math.round((condition.waitTime + parseFloat(req.body.conditionWaitTime)) / 2);
+        condition.waitTime.push(parseFloat(req.body.conditionWaitTime));
       }
 
       if (visitsBeingTreated.length === 0 || condition.severity > visitsBeingTreated[0].severity) {
