@@ -1,20 +1,67 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/css/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <ul>
-      <% if (user) { %>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/logout">Log out</a></li>
-      <% } else { %>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/signup">Sign up</a></li>
-      <% } %>
-    </ul>
-  </body>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>ERWatch - Home</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <!--<link href="/css/style.css" rel="stylesheet">-->
+
+</head>
+<body>
+
+  <nav class="blue-grey darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><b>ERWatch</b></a>
+
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Professional Login</a></li>
+      </ul>
+
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+
+    <div class= "valign-wrapper">
+      <div class="valign container">
+        <br><br>
+
+
+
+        <h3 class="header center red-text  text-darken-1">ERWatch</h3>
+        <div class="divider"></div>
+        <div class="row center">
+          <h5 class="header col s12 light">Please enter your patient code:</h5>
+        </div>
+
+        <div class="row">
+          <div class="col s4"></div>
+          <div class="input-field col s4">
+            <input placeholder="123456..." id="first_name" type="text" class="validate">
+            <label for="first_name">Code</label>
+          </div>
+          <div class="col s4"></div>
+        </div>
+
+
+
+        <div class="row center">
+          <a href="" id="submit-button" class="btn-large waves-effect waves-light red darken-1">Get Wait Time</a>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+</body>
 </html>
