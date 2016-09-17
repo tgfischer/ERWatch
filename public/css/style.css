@@ -1,18 +1,20 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
 .full-page {
   display: flex;
   flex-flow: column;
-  height: 100vh;
+  height: calc(100vh - 64px); /* 64px being the height of the nav */
 }
 
 .full-page .valign-wrapper {
   flex: 1 1 auto;
+}
+
+.btn.btn-border {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff !important;
+}
+
+.btn.btn-border:hover {
+  background: white;
+  color: black !important;
 }
