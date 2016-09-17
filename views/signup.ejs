@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sign up</title>
-    <link rel='stylesheet' href='/css/style.css' />
-  </head>
-  <body>
-    <form action="/signup" method="POST">
-      <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
-      <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
-      <input class="email" type="text" name="email" placeholder="Email" /><br>
-      <input class="password" type="password" name="password" placeholder="Password" /><br>
-      <input class="submit" type="submit" />
-    </form>
-  </body>
+<head>
+  <title>Sign up</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <% include common/nav %>
+
+  <div class="section no-pad-bot full-page" id="index-banner">
+    <div class= "valign-wrapper">
+      <div class="valign container">
+
+        <div class="row center">
+          <h5 class="header col s12 light">Sign Up</h5>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+          <form class ="col s4"></form>
+          <form class = "col s4"action="/signup" method="POST">
+            <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
+            <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
+            <input class="email" type="text" name="email" placeholder="Email" /><br>
+            <input class="password" type="password" name="password" placeholder="Password" /><br>
+            <input class="submit btn waves-effect waves-light red darken-1" type="submit" />
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
 </html>
