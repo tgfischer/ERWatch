@@ -1,69 +1,43 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>ERWatch - Home</title>
-
+  <title>Add Patient</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   <link href="/css/style.css" rel="stylesheet">
-
 </head>
 <body>
   <% include ../common/nav %>
 
-  <div class="large-padding-top container">
-    <div class="row">
-      <div class="col s12">
-        <p class="flow-text">Add a new patient</p>
+
+  <div class="row">
+    <form action="/dashboard/add-patient" method="POST">
+      <div class="col s6">
+        <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
+      </div>
+      <div class="col s6">
+        <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
+      </div>
+      <div class="col s6">
+        <input class="healthCard" type="text" name="healthCard" placeholder="Health Card #" /><br>
       </div>
 
 
-    </div>
-  </div>
+      <div class="input-field col s6" name="gender">
+        <select>
+          <option value="" disabled selected>Choose your option</option>
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <label>Materialize Select</label>
+      </div>
 
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+      <br>
 
-  <script>
-    $(document).ready(function() {
-
-    });
-  </script>
-</body>
-</html>-->
-
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Add Patient</title>
-    <link rel='stylesheet' href='/css/style.css' />
-  </head>
-  <body>
-    <ul>
-      <% if (user) { %>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/logout">Log out</a></li>
-      <% } else { %>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/signup">Sign up</a></li>
-      <% } %>
-    </ul>
-
-    <form action="/dashboard/add-patient" method="POST">
-      <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
-      <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
-      <input class="healthCard" type="text" name="healthCard" placeholder="Health Card" /><br>
-      <select class="gender" name="gender">
-        <option>Male</option>
-        <option>Female</option>
-        <option>Other</option>
-      </select><br>
       <input class="birthday" type="date" name="birthday" placeholder="Birthday" /><br>
       <input class="conditionName" type="text" name="conditionName" placeholder="Condition Name" /><br>
-      <textarea class="description" name="description"></textarea>
+      <textarea class="description" name="description" placeholder="Description"></textarea>
       <select class="severity" name="conditionSeverity">
         <option>1</option>
         <option>2</option>
@@ -79,5 +53,6 @@
       <input class="waitTime" type="number" name="conditionWaitTime" /><br>
       <input class="submit" type="submit" />
     </form>
-  </body>
+  </div>
+</body>
 </html>
