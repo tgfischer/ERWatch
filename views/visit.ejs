@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard</title>
+    <title>Visit information</title>
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
@@ -14,16 +14,12 @@
         <li><a href="/signup">Sign up</a></li>
       <% } %>
     </ul>
-
     <p>
-      <%= JSON.stringify(visitsBeingTreated, null, 2) %>
-    </p>
-    <p>
-      <%= JSON.stringify(queue, null, 2) %>
-    </p>
-
-    <p>
-      <a href="/dashboard/add-patient">Add Patient</a>
+      <% if (typeof waitTime !== 'undefined') { %>
+        <%= waitTime %>
+      <% } else { %>
+        <%= msg %>
+      <% } %>
     </p>
   </body>
 </html>

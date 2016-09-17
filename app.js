@@ -50,6 +50,7 @@ app.use(function(req, res, next) {
 /* Set up the routes
 ------------------------------------------------------ */
 var index = require('./routes/index');
+var visit= require('./routes/visit');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
 var logout = require('./routes/logout');
@@ -58,6 +59,7 @@ var dashboard = require('./routes/dashboard/dashboard');
 var addPatient = require('./routes/dashboard/addPatient');
 
 app.use('/', index);
+app.use('/v', visit);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/logout', logout);

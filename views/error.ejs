@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard</title>
+    <title>Error</title>
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
+    <h1>ERROR</h1>
+    <p>Something went wrong :(</p>
     <ul>
       <% if (user) { %>
         <li><a href="/dashboard">Dashboard</a></li>
@@ -14,16 +16,5 @@
         <li><a href="/signup">Sign up</a></li>
       <% } %>
     </ul>
-
-    <p>
-      <%= JSON.stringify(visitsBeingTreated, null, 2) %>
-    </p>
-    <p>
-      <%= JSON.stringify(queue, null, 2) %>
-    </p>
-
-    <p>
-      <a href="/dashboard/add-patient">Add Patient</a>
-    </p>
   </body>
 </html>
