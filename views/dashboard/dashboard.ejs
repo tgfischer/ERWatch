@@ -14,72 +14,101 @@
 <body>
   <% include ../common/nav %>
 
-  <div class="container">
+  <div class="large-padding-top container">
     <div class="row">
       <div class="col s12">
-        <p class="flow-text">Patients currently being treating</p>
+        <a href="/dashboard/add-patient"class="btn red darken-1">Add new patient</a>
+      </div>
+      <div class="col s12">
+        <p class="flow-text">Patient<% if (visitsBeingTreated.length !== 1) { %>s<% } %> currently being treating</p>
       </div>
 
-      <% visitsBeingTreated.forEach(function(visit, i) { %>
+      <% if (visitsBeingTreated.length === 0) { %>
         <div class="col s12">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">
-                <%= visit.patient.firstName %> <%= visit.patient.lastName %>
-              </span>
-              <p class="grey-text text-darken-1">
-                Reason for visit: <%= visit.condition.name %> (Severity <%= visit.condition.severity %>)
-              </p>
-              <p class="grey-text">
-                Arrival time: <%= visit.arrivalTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
-              </p>
-              <p class="grey-text">
-                Admission time: <%= visit.admitTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
-              </p>
-              <p class="padding-top">
-                I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.
-              </p>
-            </div>
-            <div class="card-action">
-              <a href="#">Mark as treated</a>
+          <p>There are no patients who are currently being examined by a doctor</p>
+        </div>
+      <% } else { %>
+        <% visitsBeingTreated.forEach(function(visit, i) { %>
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">
+                  <%= visit.patient.firstName %> <%= visit.patient.lastName %>
+                </span>
+                <p class="grey-text text-darken-1">
+                  Approximate time remaing: <%= visit.timeUntilFinished %> minutes
+                </p>
+                <p class="grey-text text-darken-1">
+                  Reason for visit: <%= visit.condition.name %> (Severity <%= visit.condition.severity %>)
+                </p>
+                <p class="grey-text">
+                  Arrival time: <%= visit.arrivalTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
+                </p>
+                <p class="grey-text">
+                  Admission time: <%= visit.admitTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
+                </p>
+                <p class="padding-top">
+                  <%= visit.description %>
+                </p>
+              </div>
+              <div class="card-action">
+                <a href="#">Mark as treated</a>
+              </div>
             </div>
           </div>
-        </div>
-      <% }); %>
+        <% }); %>
+      <% } %>
     </div>
 
     <div class="row">
       <div class="col s12">
-        <p class="flow-text">Patients waiting to be treated</p>
+        <p class="flow-text">Patient<% if (queue.length !== 1) { %>s<% } %> waiting to be treated</p>
       </div>
 
-      <% queue.forEach(function(visit, i) { %>
+      <% if (queue.length === 0) { %>
         <div class="col s12">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">
-                <%= visit.patient.firstName %> <%= visit.patient.lastName %>
-              </span>
-              <p class="grey-text text-darken-1">
-                Reason for visit: <%= visit.condition.name %> (Severity <%= visit.condition.severity %>)
-              </p>
-              <p class="grey-text text-darken-1">
+          <p>There are no patients who are waiting to see a doctor at the moment</p>
+        </div>
+      <% } else { %>
+        <% queue.forEach(function(visit, i) { %>
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">
+                  <%= visit.patient.firstName %> <%= visit.patient.lastName %>
+                </span>
+                <p class="grey-text text-darken-1">
+                  Reason for visit: <%= visit.condition.name %> (Severity <%= visit.condition.severity %>)
+                </p>
                 <% if (visit.totalWaitTime > 0) { %>
-                  Approximate wait time: <%= visit.totalWaitTime %> minutes
+                  <p class="grey-text text-darken-1">
+                    Approximate wait time: <%= visit.totalWaitTime %> minutes
+                  </p>
+                  <p class="grey-text text-darken-1">
+                    Approximate time to treat patient: <%= visit.condition.waitTime %> minutes
+                  </p>
                 <% } else { %>
-                  It will be <%= visit.patient.firstName %> <%= visit.patient.lastName %>'s turn shortly
+                  <p class="grey-text text-darken-1">
+                    It will be <%= visit.patient.firstName %> <%= visit.patient.lastName %>'s turn shortly
+                  </p>
                 <% } %>
-              </p>
-              <p class="grey-text">
-                Arrival time: <%= visit.arrivalTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
-              </p>
-            </div>
-            <div class="card-action">
-              <a href="#">Mark as treated</a>
+                <p class="grey-text">
+                  Arrival time: <%= visit.arrivalTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
+                </p>
+                <p class="grey-text">
+                  Access code: <%= visit.code %>
+                </p>
+                <p class="padding-top">
+                  <%= visit.description %>
+                </p>
+              </div>
+              <div class="card-action">
+                <a href="#">Mark as treated</a>
+              </div>
             </div>
           </div>
-        </div>
-      <% }); %>
+        <% }); %>
+      <% } %>
     </div>
   </div>
 
@@ -89,7 +118,7 @@
 
   <script>
     $(document).ready(function() {
-      
+
     });
   </script>
 </body>
