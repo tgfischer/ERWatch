@@ -7,7 +7,7 @@ var Utils = {
   getQueue: function(next) {
     var _this = this;
 
-    Visit.where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
+    Visit.find({ hospital: req.user.hospital._id }).where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -35,7 +35,7 @@ var Utils = {
   },
 
   getVisitsBeingTreated: function(next) {
-    Visit.where('admitTime').ne(null).where('resolutionTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
+    Visit.find({ hospital: req.user.hospital._id }).where('admitTime').ne(null).where('resolutionTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -60,7 +60,7 @@ var Utils = {
       if (err) {
         return next(err);
       }
-      
+
       var waitTime = 0;
       var visit;
 

@@ -55,6 +55,7 @@ router.post('/', Auth.isLoggedIn, function(req, res, next) {
         }
 
         visit.condition = condition._id;
+        visit.hospital = req.user.hospital._id;
 
         visit.save(function(err) {
           if (err) {
