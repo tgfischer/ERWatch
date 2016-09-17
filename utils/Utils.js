@@ -62,7 +62,6 @@ var Utils = {
         visit.timeUntilFinished = visit.condition.waitTime - visit.getTimeDifference();
         callback();
       }, function(err) {
-        console.log(err);
         if (err) {
           return next(err);
         }
@@ -131,6 +130,16 @@ var Utils = {
 
         return next(null, queue);
       });
+    });
+  },
+
+  markPatientAsTreated: function(code, next) {
+    Visit.update({ code: code }, { resolutionTime: Date.now() },  function(err) {
+      if (err) {
+        return next(err);
+      }
+
+      return next();
     });
   }
 

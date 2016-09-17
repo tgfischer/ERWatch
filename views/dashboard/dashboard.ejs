@@ -52,7 +52,7 @@
                 </p>
               </div>
               <div class="card-action">
-                <a href="#">Mark as treated</a>
+                <a href="#" class="mark-as-treated-btn red-text" data-code="<%= visit.code %>">Mark as treated</a>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
       <% } else { %>
         <% queue.forEach(function(visit, i) { %>
           <div class="col s12">
-            <div class="card">
+            <div class="queue card" data-code="<%= visit.code %>">
               <div class="card-content">
                 <span class="card-title">
                   <%= visit.patient.firstName %> <%= visit.patient.lastName %>
@@ -103,12 +103,33 @@
                 </p>
               </div>
               <div class="card-action">
-                <a href="#">Mark as treated</a>
+                <a href="#" class="mark-as-treated-btn" data-code="<%= visit.code %>">Mark as treated</a>
               </div>
             </div>
           </div>
         <% }); %>
       <% } %>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="success-modal" class="modal">
+    <div class="modal-content">
+      <h4>Success!</h4>
+      <p>The patient was successfully marked as treated</p>
+    </div>
+    <div class="modal-footer">
+      <a class="btn modal-action modal-close btn-flat">Okay</a>
+    </div>
+  </div>
+
+  <div id="error-modal" class="modal">
+    <div class="modal-content">
+      <h4>Error!</h4>
+      <p>Something seems to have gone wrong. Please try again later</p>
+    </div>
+    <div class="modal-footer">
+      <a class="btn modal-action modal-close btn-flat">Okay</a>
     </div>
   </div>
 
@@ -118,7 +139,27 @@
 
   <script>
     $(document).ready(function() {
+      $('.mark-as-treated-btn').click(function(e) {
+        $.post('/dashboard/mark_treated', {
+          code: $(this).data('code')
+        }, function(res) {
+          if (res.err) {
+            $('#error-modal').openModal({
+              complete: function() {
+                window.location.href = "/dashboard";
+              }
+            });
+          } else {
+            $('#success-modal').openModal({
+              complete: function() {
+                window.location.href = "/dashboard";
+              }
+            });
+          }
+        });
 
+        return false;
+      });
     });
   </script>
 </body>

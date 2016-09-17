@@ -33,13 +33,17 @@ router.post('/', Auth.isLoggedIn, function(req, res, next) {
         condition.name = req.body.conditionName;
         condition.waitTime = req.body.conditionWaitTime;
         condition.severity = req.body.conditionSeverity;
+      } else {
+        console.log("Saved: " + condition.waitTime);
+        console.log("new: " + req.body.conditionWaitTime);
+        condition.waitTime = (condition.waitTime + req.body.conditionWaitTime) / 2
       }
 
       if (visitsBeingTreated.length === 0 || condition.severity > visitsBeingTreated[0].severity) {
         visit.admitTime = Date.now();
       }
 
-      condition.save(function(err) {
+      Condition.update({ _id: condition._id }, condition, { upsert: true }, function(err) {
         if (err) {
           console.error(JSON.stringify(err, null, 2));
 

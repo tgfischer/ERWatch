@@ -30,3 +30,7 @@
 .large-padding-top {
   padding-top: 2em;
 }
+
+.btn {
+  cursor: pointer !important;
+}

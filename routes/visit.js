@@ -10,8 +10,6 @@ router.get('/:code', function(req, res, next) {
       res.send({ err: err })
     }
 
-    console.log(result.visit.getTimeUntilFinished());
-
     if (result.visit) {
       return res.render('visit', {
         firstName: result.visit.patient.firstName,
