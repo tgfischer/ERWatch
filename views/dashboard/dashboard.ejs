@@ -1,29 +1,96 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Dashboard</title>
-    <link rel='stylesheet' href='/css/style.css' />
-  </head>
-  <body>
-    <ul>
-      <% if (user) { %>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/logout">Log out</a></li>
-      <% } else { %>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/signup">Sign up</a></li>
-      <% } %>
-    </ul>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>ERWatch - Home</title>
 
-    <p>
-      <%= JSON.stringify(visitsBeingTreated, null, 2) %>
-    </p>
-    <p>
-      <%= JSON.stringify(queue, null, 2) %>
-    </p>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <link href="/css/style.css" rel="stylesheet">
 
-    <p>
-      <a href="/dashboard/add-patient">Add Patient</a>
-    </p>
-  </body>
+</head>
+<body>
+  <% include ../common/nav %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <p class="flow-text">Patients currently being treating</p>
+      </div>
+
+      <% visitsBeingTreated.forEach(function(visit, i) { %>
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                <%= visit.patient.firstName %> <%= visit.patient.lastName %>
+              </span>
+              <p class="grey-text text-darken-1">
+                Reason for visit: <%= visit.condition.name %> (Severity <%= visit.condition.severity %>)
+              </p>
+              <p class="grey-text">
+                Arrival time: <%= visit.arrivalTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
+              </p>
+              <p class="grey-text">
+                Admission time: <%= visit.admitTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
+              </p>
+              <p class="padding-top">
+                I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#">Mark as treated</a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+    <div class="row">
+      <div class="col s12">
+        <p class="flow-text">Patients waiting to be treated</p>
+      </div>
+
+      <% queue.forEach(function(visit, i) { %>
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                <%= visit.patient.firstName %> <%= visit.patient.lastName %>
+              </span>
+              <p class="grey-text text-darken-1">
+                Reason for visit: <%= visit.condition.name %> (Severity <%= visit.condition.severity %>)
+              </p>
+              <p class="grey-text text-darken-1">
+                <% if (visit.totalWaitTime > 0) { %>
+                  Approximate wait time: <%= visit.totalWaitTime %> minutes
+                <% } else { %>
+                  It will be <%= visit.patient.firstName %> <%= visit.patient.lastName %>'s turn shortly
+                <% } %>
+              </p>
+              <p class="grey-text">
+                Arrival time: <%= visit.arrivalTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#">Mark as treated</a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      
+    });
+  </script>
+</body>
 </html>

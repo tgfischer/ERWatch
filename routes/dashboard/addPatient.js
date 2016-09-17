@@ -3,14 +3,15 @@ var Patient = require('../../models/patient');
 var Visit = require('../../models/visit');
 var Condition = require('../../models/condition');
 var Utils = require('../../utils/Utils');
+var Auth = require('../../utils/Auth');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', Auth.isLoggedIn, function(req, res, next) {
   res.render('dashboard/addPatient');
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', Auth.isLoggedIn, function(req, res, next) {
   Condition.findOne({ name: req.body.conditionName }, function(err, condition) {
     if (err) {
       console.error(JSON.stringify(err, null, 2));

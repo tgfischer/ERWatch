@@ -1,4 +1,5 @@
 var express = require('express');
+var async = require('async');
 var Visit = require('../models/visit');
 
 var Utils = {
@@ -98,6 +99,29 @@ var Utils = {
           waitTime: waitTime,
           visit: visit
         });
+      });
+    });
+  },
+
+  getQueueWithWaitTimes: function(next) {
+    var _this = this;
+
+    this.getQueue(function(err, queue) {
+      if (err) {
+        return next(err);
+      }
+
+      async.each(queue, function(visit, callback) {
+        _this.getEstimatedWaitTime(visit.code, function(err, result) {
+          visit.totalWaitTime = result.waitTime
+          callback();
+        });
+      }, function(err) {
+        if (err) {
+          return next(err);
+        }
+
+        return next(err, queue);
       });
     });
   }

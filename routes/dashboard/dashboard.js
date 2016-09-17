@@ -1,9 +1,10 @@
 var express = require('express');
 var Utils = require('../../utils/Utils');
+var Auth = require('../../utils/Auth');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', Auth.isLoggedIn, function(req, res, next) {
   Utils.getVisitsBeingTreated(function(err, visitsBeingTreated) {
     if (err) {
       console.log(JSON.stringify(err, null, 2));
@@ -14,7 +15,7 @@ router.get('/', function(req, res, next) {
       });
     }
 
-    Utils.getQueue(function(err, queue) {
+    Utils.getQueueWithWaitTimes(function(err, queue) {
       if (err) {
         console.log(JSON.stringify(err, null, 2));
 

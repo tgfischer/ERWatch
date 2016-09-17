@@ -18,3 +18,11 @@
   background: white;
   color: black !important;
 }
+
+.padding-right {
+  padding-right: 10px;
+}
+
+.padding-top {
+  padding-top: 10px;
+}

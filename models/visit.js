@@ -6,6 +6,8 @@ var VisitSchema = new Schema({
   arrivalTime     : Date,
   admitTime       : Date,
   resolutionTime  : Date,
+  description     : String,
+  totalWaitTime   : String,
   patient         : { type: Schema.Types.ObjectId, ref: 'Patient' },
   condition       : { type: String, ref: 'Condition' }
 }, {
