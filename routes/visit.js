@@ -11,12 +11,20 @@ router.get('/:code', function(req, res, next) {
     }
 
     if (result.visit) {
+      var expectedDate = new Date();
+      expectedDate = new Date(expectedDate.getTime() + result.waitTime * 60000).toLocaleTimeString('en-US', {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      console.log(expectedDate);
+
       return res.render('visit', {
-        firstName: result.visit.patient.firstName,
-        lastName: result.visit.patient.lastName,
+        patient: result.visit.patient,
         waitTime: result.waitTime,
-        arrivalTime: result.visit.admitTime,
-        conditionName: result.visit.condition.name
+        visit: result.visit,
+        condition: result.visit.condition,
+        expectedDate: expectedDate
       });
     } else {
       return res.render('visit', {
