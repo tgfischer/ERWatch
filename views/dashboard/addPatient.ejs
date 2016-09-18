@@ -20,28 +20,28 @@
 
                 <!-- //////// row 1 ////////-->
                 <div class = "row">
-                  <div class="col s6">
-                    <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
+                  <div class="col s6 input-field">
+                    <input class="firstName" type="text" name="firstName" placeholder="First Name" />
                   </div>
-                  <div class="col s6">
-                    <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
+                  <div class="col s6 input-field">
+                    <input class="lastName" type="text" name="lastName" placeholder="Last Name" />
                   </div>
                 </div>
 
                 <!-- //////// row 2 ////////-->
                 <div class = "row">
-                  <div class="col s12">
-                    <input class="healthCard" type="text" name="healthCard" placeholder="Health Card #" /><br>
+                  <div class="col s12 input-field">
+                    <input class="healthCard" type="text" name="healthCard" placeholder="Health Card #" />
                   </div>
 
                 </div>
                 <!-- //////// row 3 /////////-->
                 <div class = "row">
 
-                  <div class="col s6">
-                    <input class="birthday" type="date" name="birthday" placeholder="Birthday" /><br>
+                  <div class="col s6 input-field">
+                    <input class="birthday datepicker" type="date" name="birthday" placeholder="Date of Birth" />
                   </div>
-                  <div class="gender col s6" name="gender">
+                  <div class="gender col s6 input-field" name="gender">
                     <select>
                       <option value="" disabled selected>Gender</option>
                       <option value="1">Male</option>
@@ -55,15 +55,15 @@
                 <!-- //////// row 4 /////////-->
                 <div class = "row">
 
-                  <div class="col s12">
-                    <input class="conditionName" type="text" name="conditionName" placeholder="Condition Name" /><br>
+                  <div class="col s12 input-field">
+                    <input class="conditionName" type="text" name="conditionName" placeholder="Condition Name" />
                   </div>
 
                 </div>
 
                 <!-- //////// row 5 /////////-->
                 <div class = "row">
-                  <div class="col s6">
+                  <div class="col s6 input-field">
                     <select class="severity" name="conditionSeverity" placeholder="Severity">
                       <option value="" disabled selected>Severity</option>
                       <option>1</option>
@@ -79,8 +79,8 @@
                     </select>
                   </div>
 
-                  <div class = "col s6">
-                    <input class="waitTime" type="number" name="conditionWaitTime" placeholder="Visit Duration (mins)"/><br>
+                  <div class = "col s6 input-field">
+                    <input class="waitTime" type="number" name="conditionWaitTime" placeholder="Visit Duration (mins)"/>
                   </div>
                 </div>
 
@@ -88,16 +88,15 @@
 
                 <div class = "row">
 
-                  <div class="col s12">
-                    <textarea class="description" name="description" placeholder="Description"></textarea>
+                  <div class="col s12 input-field">
+                    <textarea class="description materialize-textarea" name="description" placeholder="Description"></textarea>
                   </div>
 
                 </div>
 
-
                 <!-- //////// Add Patient /////////-->
 
-                <div class="row center">
+                <div class="row">
                   <a id="submit-button" class="submit btn-large red darken-1" type="submit">Add Patient</a>
                 </div>
 
@@ -117,6 +116,14 @@
     $('select').material_select();
     Materialize.updateTextFields();
   });
+
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+
+  $('#textarea1').val('New Text');
+  $('#textarea1').trigger('autoresize');
   </script>
 </body>
 </html>
