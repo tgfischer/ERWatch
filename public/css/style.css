@@ -19,6 +19,11 @@
   color: black !important;
 }
 
+.margin-right {
+margin-right: 10px;
+
+}
+
 .padding-right {
   padding-right: 10px;
 }
@@ -35,47 +40,30 @@
   cursor: pointer !important;
 }
 
-.statistic {
-  line-height: 1;
-}
-
-.large.statistic .number {
-  font-size: 30em;
-}
-
-.small.statistic .number {
-  font-size: 5em;
-}
-
-.large.statistic .caption {
-  font-size: 3em;
-  font-weight: 500;
-}
-
-.small.statistic .caption {
-  font-size: 1.25em;
-  font-weight: 400;
-}
-
-.large.statistic .foot {
-  font-size: 2em;
-}
-
-.small.statistic .foot {
-  font-size: 1em;
-}
-
-.statistic .number {
-  font-weight: 700;
-  margin: 0px;
-  display: block;
-}
-
-.statistic .caption {
-  display: block;
-}
-
-.statistic .foot {
-  font-weight: 300;
-  display:block;
-}
+/* label color */
+   .input-field label {
+     color: red !important;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #000 !important;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #000 !important;
+     box-shadow: 0 1px 0 0 #000 !important;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #000 !important;
+     box-shadow: 0 1px 0 0 #000 !important;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #000 !important;
+     box-shadow: 0 1px 0 0 #000 !important;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #000 !important;
+   }

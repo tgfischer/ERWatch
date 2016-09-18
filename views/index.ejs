@@ -18,6 +18,7 @@
     <div class= "valign-wrapper">
       <div class="valign container">
 
+
         <h1 class="header center red-text text-darken-1">
           <b>Welcome to ERWatch!</b>
         </h1>
@@ -39,7 +40,7 @@
                       <div class="input-field">
                         <select class="hospital-select">
                           <% hospitals.forEach(function(hospital, i) { %>
-                            <option value="<%= hospital._id %>"><%= hospital.name %></option>
+                            <option value="<%= hospital._id %>" class="red"><%= hospital.name %></option>
                           <% }); %>
                         </select>
                       </div>
