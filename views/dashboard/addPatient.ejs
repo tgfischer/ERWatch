@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="initial-scale=1.0,width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
   <title>Add Patient</title>
+  
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   <link href="/css/style.css" rel="stylesheet">
@@ -14,12 +18,9 @@
         <div class="card white lighten-5">
           <div class="card-content">
             <div class="row">
-              <form class = "col s12" action="/dashboard/add-patient" method="POST">
-
-
-
+              <form class="add-patient col s12 center" action="/dashboard/add-patient" method="POST">
                   <p class="flow-text">Patient Admission Form</p>
-              
+
                 <!-- //////// row 1 ////////-->
                 <div class = "row">
                   <div class="col s12 l6 input-field">
@@ -44,7 +45,7 @@
                 <div class = "row">
                   <div class="col s12 l6 input-field">
                     <label for="birthday">Date of birth</label>
-                    <input class="birthday datepicker validate" type="date" name="birthday" required />
+                    <input class="birthday datepicker validate" type="text" name="birthday" required />
                   </div>
                   <div class="col s12 l6 input-field">
                     <select class="gender validate" name="gender">
@@ -111,6 +112,27 @@
     </div>
   </div>
 
+  <!-- Modal Structure -->
+  <div id="success-modal" class="modal">
+    <div class="modal-content">
+      <h4>Success!</h4>
+      <p>The patient was successfully added to the system</p>
+    </div>
+    <div class="modal-footer">
+      <a class="btn modal-action modal-close btn-flat">Okay</a>
+    </div>
+  </div>
+
+  <div id="error-modal" class="modal">
+    <div class="modal-content">
+      <h4>Error!</h4>
+      <p>Something seems to have gone wrong. Please try again later</p>
+    </div>
+    <div class="modal-footer">
+      <a class="btn modal-action modal-close btn-flat">Okay</a>
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <script src="/js/scripts.js"></script>
@@ -118,15 +140,32 @@
   $(document).ready(function() {
     $('select').material_select();
     Materialize.updateTextFields();
-  });
 
-  $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
 
-  $('#textarea1').val('New Text');
-  $('#textarea1').trigger('autoresize');
+    $('.add-patient').submit(function(e) {
+      $.post('/dashboard/add-patient', $('.add-patient').serialize(), function(res) {
+        if (res.err) {
+          $('#error-modal').openModal({
+            complete: function() {
+              window.location.href = "/dashboard";
+            }
+          });
+        } else {
+          $('#success-modal').openModal({
+            complete: function() {
+              window.location.href = "/dashboard";
+            }
+          });
+        }
+      });
+
+      return false;
+    });
+  });
   </script>
 </body>
 </html>

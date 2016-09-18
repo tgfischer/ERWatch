@@ -3,7 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>ERWatch - Home</title>
+
+  <title>Dashboard</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -36,7 +37,7 @@
                   <%= visit.patient.firstName %> <%= visit.patient.lastName %>
                 </span>
                 <p class="grey-text text-darken-1">
-                  Approximate time remaing: <%= visit.timeUntilFinished %> minutes
+                  Approximate time remaining: <%= visit.timeUntilFinished %> minutes
                 </p>
                 <p class="grey-text text-darken-1">
                   Reason for visit: <%= visit.condition.name %> (Severity <%= visit.condition.severity %>)
@@ -84,14 +85,14 @@
                   <p class="grey-text text-darken-1">
                     Approximate wait time: <%= visit.totalWaitTime %> minutes
                   </p>
-                  <p class="grey-text text-darken-1">
-                    Approximate time to treat patient: <%= visit.condition.getAvgWaitTime() %> minutes
-                  </p>
                 <% } else { %>
                   <p class="grey-text text-darken-1">
                     It will be <%= visit.patient.firstName %> <%= visit.patient.lastName %>'s turn shortly
                   </p>
                 <% } %>
+                <p class="grey-text text-darken-1">
+                  Approximate time to treat patient: <%= visit.condition.getAvgWaitTime() %> minutes
+                </p>
                 <p class="grey-text">
                   Arrival time: <%= visit.arrivalTime.toLocaleTimeString('en-US', { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) %>
                 </p>

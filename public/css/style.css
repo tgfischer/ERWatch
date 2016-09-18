@@ -1,3 +1,7 @@
+#index-header {
+  font-size: 3rem;
+}
+
 .full-page {
   display: flex;
   flex-flow: column;
@@ -20,7 +24,7 @@
 }
 
 .margin-right {
-margin-right: 10px;
+  margin-right: 10px;
 
 }
 
@@ -41,29 +45,74 @@ margin-right: 10px;
 }
 
 /* label color */
-   .input-field label {
-     color: #000 !important;
-   }
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #000 !important;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #000 !important;
-     box-shadow: 0 1px 0 0 #000 !important;
-   }
-   /* valid color */
-   .input-field input[type=text].valid {
-     border-bottom: 1px solid #000 !important;
-     box-shadow: 0 1px 0 0 #000 !important;
-   }
-   /* invalid color */
-   .input-field input[type=text].invalid {
-     border-bottom: 1px solid #000 !important;
-     box-shadow: 0 1px 0 0 #000 !important;
-   }
-   /* icon prefix focus color */
-   .input-field .prefix.active {
-     color: #000 !important;
-   }
+.input-field label {
+  color: #000 !important;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #000 !important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #000 !important;
+  box-shadow: 0 1px 0 0 #000 !important;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #000 !important;
+  box-shadow: 0 1px 0 0 #000 !important;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #000 !important;
+  box-shadow: 0 1px 0 0 #000 !important;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #000 !important;
+}
+
+.statistic {
+  line-height: 1;
+}
+
+.large.statistic .number {
+  font-size: 40vw !important;
+}
+
+.small.statistic .number {
+  font-size: 5rem !important;
+}
+
+.large.statistic .caption {
+  font-size: 3rem !important;
+  font-weight: 500 !important;
+}
+
+.small.statistic .caption {
+  font-size: 1.25rem !important;
+  font-weight: 400 !important;
+}
+
+.large.statistic .foot {
+  font-size: 2rem !important;
+}
+
+.small.statistic .foot {
+  font-size: 1rem !important;
+}
+
+.statistic .number {
+  font-weight: 700;
+  margin: 0px;
+  display: block;
+}
+
+.statistic .caption {
+  display: block;
+}
+
+.statistic .foot {
+  font-weight: 300;
+  display:block;
+}
