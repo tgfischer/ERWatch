@@ -4,10 +4,10 @@ var Visit = require('../models/visit');
 
 var Utils = {
 
-  getQueue: function(hospital, next) {
+  getQueue: function(hospitalId, next) {
     var _this = this;
 
-    Visit.find({ hospital: hospital._id }).where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
+    Visit.find({ hospital: hospitalId }).where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -34,8 +34,8 @@ var Utils = {
     });
   },
 
-  getVisitsBeingTreated: function(hospital, next) {
-    Visit.find({ hospital: hospital._id }).where('admitTime').ne(null).where('resolutionTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
+  getVisitsBeingTreated: function(hospitalId, next) {
+    Visit.find({ hospital: hospitalId }).where('admitTime').ne(null).where('resolutionTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -53,10 +53,10 @@ var Utils = {
     });
   },
 
-  getEstimatedWaitTime: function(code, hospital, next) {
+  getEstimatedWaitTime: function(code, hospitalId, next) {
     var _this = this;
 
-    this.getQueue(hospital, function(err, visits) {
+    this.getQueue(hospitalId, function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -73,7 +73,7 @@ var Utils = {
         waitTime += visits[i].condition.getAvgWaitTime();
       }
 
-      _this.getVisitsBeingTreated(hospital, function(err, visitsBeingTreated) {
+      _this.getVisitsBeingTreated(hospitalId, function(err, visitsBeingTreated) {
         if (err) {
           return next(err);
         }
@@ -92,16 +92,16 @@ var Utils = {
     });
   },
 
-  getQueueWithWaitTimes: function(hospital, next) {
+  getQueueWithWaitTimes: function(hospitalId, next) {
     var _this = this;
 
-    this.getQueue(hospital, function(err, queue) {
+    this.getQueue(hospitalId, function(err, queue) {
       if (err) {
         return next(err);
       }
 
       async.each(queue, function(visit, callback) {
-        _this.getEstimatedWaitTime(visit.code, hospital, function(err, result) {
+        _this.getEstimatedWaitTime(visit.code, hospitalId, function(err, result) {
           visit.totalWaitTime = result.waitTime
           callback();
         });
@@ -115,19 +115,19 @@ var Utils = {
     });
   },
 
-  markPatientAsTreated: function(code, hospital, next) {
+  markPatientAsTreated: function(code, hospitalId, next) {
     var _this = this;
     Visit.update({ code: code }, { resolutionTime: Date.now() },  function(err) {
       if (err) {
         return next(err);
       }
 
-      _this.getVisitsBeingTreated(hospital, function(err, visitsBeingTreated) {
+      _this.getVisitsBeingTreated(hospitalId, function(err, visitsBeingTreated) {
         if (err) {
           next(err);
         }
 
-        _this.getQueue(hospital, function(err, queue) {
+        _this.getQueue(hospitalId, function(err, queue) {
           if (err) {
             next(err);
           }
@@ -148,10 +148,10 @@ var Utils = {
     });
   },
 
-  getWaitTimeForHospital: function(hospital, next) {
+  getWaitTimeForHospital: function(hospitalId, next) {
     var _this = this;
 
-    this.getQueue(hospital, function(err, visits) {
+    this.getQueue(hospitalId, function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -163,7 +163,7 @@ var Utils = {
         waitTime += visits[i].condition.getAvgWaitTime();
       }
 
-      _this.getVisitsBeingTreated(hospital, function(err, visitsBeingTreated) {
+      _this.getVisitsBeingTreated(hospitalId, function(err, visitsBeingTreated) {
         if (err) {
           return next(err);
         }

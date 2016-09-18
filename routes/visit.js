@@ -17,8 +17,6 @@ router.get('/:code', function(req, res, next) {
         minute: "2-digit"
       });
 
-      console.log(expectedDate);
-
       return res.render('visit', {
         patient: result.visit.patient,
         waitTime: result.waitTime,
