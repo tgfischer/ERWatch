@@ -11,25 +11,42 @@
 
   <div class="section no-pad-bot full-page" id="index-banner">
     <div class= "valign-wrapper">
-      <div class="container">
+      <div class="valign container">
 
         <div class="row center">
-          <h5 class="header col s12 light">Professional Login</h5>
+          <h5 class="header col s12 light">Log in</h5>
         </div>
-
         <div class="row">
-          <form class ="col s4"></form>
-          <form class="col s4"action="/login" method="POST">
-            <input class="email" type="text" name="email" placeholder="Email" /><br>
-            <input class="password" type="password" name="password" placeholder="Password" /><br>
-            <input class="submit btn waves-effect waves-light red darken-1" type="submit"/>
+          <div class="col s12 l2"></div>
+          <form class="col s12 l8" action="/login" method="POST">
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" class="validate" placeholder="Email" autocomplete="off">
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" class="validate" placeholder="Password" autocomplete="off">
+              </div>
+            </div>
+
+            <input class="submit btn red darken-1" type="submit" />
           </form>
 
         </div>
-
       </div>
     </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('select').material_select();
+    Materialize.updateTextFields();
+  });
+  </script>
 </body>
 </html>

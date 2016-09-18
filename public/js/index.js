@@ -5,7 +5,7 @@ $(document).ready(function() {
       hospitalId: $('select.hospital-select').val()
     }, function(res) {
       if (res.err) {
-
+        // Throw a modal up
       } else {
         $('.small.statistic .number').text(res.waitTime);
       }
