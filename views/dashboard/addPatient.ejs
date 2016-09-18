@@ -20,29 +20,32 @@
 
                 <!-- //////// row 1 ////////-->
                 <div class = "row">
-                  <div class="col s12 l6">
-                    <input class="firstName" type="text" name="firstName" placeholder="First Name" />
+                  <div class="col s12 l6 input-field">
+                    <label for="firstName">First Name</label>
+                    <input class="firstName validate" type="text" name="firstName" required />
                   </div>
-                  <div class="col s12 l6">
-                    <input class="lastName" type="text" name="lastName" placeholder="Last Name" />
+                  <div class="col s12 l6 input-field">
+                    <label for="lastName">Last Name</label>
+                    <input class="lastName validate" type="text" name="lastName" required />
                   </div>
                 </div>
 
                 <!-- //////// row 2 ////////-->
                 <div class = "row">
-                  <div class="col s12">
-                    <input class="healthCard" type="text" name="healthCard" placeholder="Health Card #" />
+                  <div class="col s12 input-field">
+                    <label for="healthCard">Health Card</label>
+                    <input class="healthCard validate" type="text" name="healthCard" required />
                   </div>
 
                 </div>
                 <!-- //////// row 3 /////////-->
                 <div class = "row">
-
-                  <div class="col s12 l6">
-                    <input class="birthday" type="date" name="birthday" placeholder="Birthday" />
+                  <div class="col s12 l6 input-field">
+                    <label for="birthday">Date of birth</label>
+                    <input class="birthday datepicker validate" type="date" name="birthday" required />
                   </div>
-                  <div class="col s12 l6">
-                    <select class="gender " name="gender">
+                  <div class="col s12 l6 input-field">
+                    <select class="gender validate" name="gender">
                       <option value="" disabled selected>Gender</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -54,17 +57,16 @@
                 </div>
                 <!-- //////// row 4 /////////-->
                 <div class = "row">
-
-                  <div class="col s12">
-                    <input class="conditionName" type="text" name="conditionName" placeholder="Condition Name" />
+                  <div class="col s12 input-field">
+                    <label for="conditionName">Condition Name</label>
+                    <input class="conditionName validate" type="text" name="conditionName" required />
                   </div>
-
                 </div>
 
                 <!-- //////// row 5 /////////-->
                 <div class = "row">
-                  <div class="col s6">
-                    <select class="severity" name="conditionSeverity" placeholder="Severity">
+                  <div class="col s6 input-field">
+                    <select class="severity validate" name="conditionSeverity" placeholder="Severity" required>
                       <option value="" disabled selected>Severity</option>
                       <option>1</option>
                       <option>2</option>
@@ -79,24 +81,22 @@
                     </select>
                   </div>
 
-                  <div class="col s6">
-                    <input class="waitTime" type="number" name="conditionWaitTime" placeholder="Visit Duration (mins)"/>
+                  <div class="col s6 input-field">
+                    <label for="conditionWaitTime">Appointment Duration (minutes)</label>
+                    <input class="waitTime validate" type="number" name="conditionWaitTime" required />
                   </div>
                 </div>
 
                 <!-- //////// row 6 /////////-->
 
                 <div class = "row">
-
-                  <div class="col s12">
-                    <textarea class="description" name="description" placeholder="Description"></textarea>
+                  <div class="col s12 input-field">
+                    <label for="description">Condition Description</label>
+                    <textarea class="description materialize-textarea validate" name="description" required></textarea>
                   </div>
-
                 </div>
 
-
                 <!-- //////// Add Patient /////////-->
-
                 <div class="row center">
                   <input id="submit-button" class="submit btn-large red darken-1" type="submit" value="Add Patient" />
                 </div>
@@ -117,6 +117,14 @@
     $('select').material_select();
     Materialize.updateTextFields();
   });
+
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+
+  $('#textarea1').val('New Text');
+  $('#textarea1').trigger('autoresize');
   </script>
 </body>
 </html>
