@@ -30,7 +30,8 @@ var Utils = {
         return next("This patient is not currently being treated");
       }
 
-      return next(null, visit.condition.getAvgWaitTime() - visit.getTimeDifference());
+      var timeUntilFinished = visit.condition.getAvgWaitTime() - visit.getTimeDifference();
+      return next(null, timeUntilFinished > 0 ? timeUntilFinished : 0);
     });
   },
 
@@ -41,7 +42,8 @@ var Utils = {
       }
 
       async.each(visits, function(visit, callback) {
-        visit.timeUntilFinished = visit.condition.getAvgWaitTime() - visit.getTimeDifference();
+        var timeUntilFinished = visit.condition.getAvgWaitTime() - visit.getTimeDifference();
+        visit.timeUntilFinished = timeUntilFinished > 0 ? timeUntilFinished : 0;
         callback();
       }, function(err) {
         if (err) {
