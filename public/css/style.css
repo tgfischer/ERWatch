@@ -1,3 +1,7 @@
+#index-header {
+  font-size: 3rem;
+}
+
 .full-page {
   display: flex;
   flex-flow: column;
