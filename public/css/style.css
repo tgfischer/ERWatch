@@ -40,11 +40,11 @@
 }
 
 .large.statistic .number {
-  font-size: 25vw !important;
+  font-size: 40vw !important;
 }
 
 .small.statistic .number {
-  font-size: 5rem !important;
+  font-size: 15vw !important;
 }
 
 .large.statistic .caption {
