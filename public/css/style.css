@@ -2,6 +2,10 @@
   font-size: 3rem;
 }
 
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
 .full-page {
   display: flex;
   flex-flow: column;
