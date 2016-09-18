@@ -4,10 +4,10 @@ var Visit = require('../models/visit');
 
 var Utils = {
 
-  getQueue: function(next) {
+  getQueue: function(hospital, next) {
     var _this = this;
 
-    Visit.find({ hospital: req.user.hospital._id }).where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
+    Visit.find({ hospital: hospital._id }).where('admitTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -34,8 +34,8 @@ var Utils = {
     });
   },
 
-  getVisitsBeingTreated: function(next) {
-    Visit.find({ hospital: req.user.hospital._id }).where('admitTime').ne(null).where('resolutionTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
+  getVisitsBeingTreated: function(hospital, next) {
+    Visit.find({ hospital: hospital._id }).where('admitTime').ne(null).where('resolutionTime').equals(null).populate([ 'patient', 'condition' ]).exec(function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -53,10 +53,10 @@ var Utils = {
     });
   },
 
-  getEstimatedWaitTime: function(code, next) {
+  getEstimatedWaitTime: function(code, hospital, next) {
     var _this = this;
 
-    this.getQueue(function(err, visits) {
+    this.getQueue(hospital, function(err, visits) {
       if (err) {
         return next(err);
       }
@@ -73,7 +73,7 @@ var Utils = {
         waitTime += visits[i].condition.getAvgWaitTime();
       }
 
-      _this.getVisitsBeingTreated(function(err, visitsBeingTreated) {
+      _this.getVisitsBeingTreated(hospital, function(err, visitsBeingTreated) {
         if (err) {
           return next(err);
         }
@@ -85,23 +85,23 @@ var Utils = {
         waitTime += treated.condition.getAvgWaitTime() - treated.getTimeDifference();
 
         return next(null, {
-          waitTime: waitTime,
+          waitTime: waitTime > 0 ? waitTime : 0,
           visit: visit
         });
       });
     });
   },
 
-  getQueueWithWaitTimes: function(next) {
+  getQueueWithWaitTimes: function(hospital, next) {
     var _this = this;
 
-    this.getQueue(function(err, queue) {
+    this.getQueue(hospital, function(err, queue) {
       if (err) {
         return next(err);
       }
 
       async.each(queue, function(visit, callback) {
-        _this.getEstimatedWaitTime(visit.code, function(err, result) {
+        _this.getEstimatedWaitTime(visit.code, hospital, function(err, result) {
           visit.totalWaitTime = result.waitTime
           callback();
         });
@@ -115,19 +115,19 @@ var Utils = {
     });
   },
 
-  markPatientAsTreated: function(code, next) {
+  markPatientAsTreated: function(code, hospital, next) {
     var _this = this;
     Visit.update({ code: code }, { resolutionTime: Date.now() },  function(err) {
       if (err) {
         return next(err);
       }
 
-      _this.getVisitsBeingTreated(function(err, visitsBeingTreated) {
+      _this.getVisitsBeingTreated(hospital, function(err, visitsBeingTreated) {
         if (err) {
           next(err);
         }
 
-        _this.getQueue(function(err, queue) {
+        _this.getQueue(hospital, function(err, queue) {
           if (err) {
             next(err);
           }
@@ -143,6 +143,42 @@ var Utils = {
           } else {
             return next();
           }
+        });
+      });
+    });
+  },
+
+  getWaitTimeForHospital: function(hospital, next) {
+    var _this = this;
+
+    this.getQueue(hospital, function(err, visits) {
+      if (err) {
+        return next(err);
+      }
+
+      var waitTime = 0;
+      var visit;
+
+      for (var i = 0; i < visits.length; i++) {
+        waitTime += visits[i].condition.getAvgWaitTime();
+      }
+
+      _this.getVisitsBeingTreated(hospital, function(err, visitsBeingTreated) {
+        if (err) {
+          return next(err);
+        }
+
+        if (visitsBeingTreated.length > 0) {
+          var treated = visitsBeingTreated.sort(function(a, b) {
+            return a.condition.getAvgWaitTime() - a.getTimeDifference() < b.condition.getAvgWaitTime() - b.getTimeDifference();
+          })[0];
+
+          waitTime += treated.condition.getAvgWaitTime() - treated.getTimeDifference();
+        }
+
+        return next(null, {
+          waitTime: waitTime > 0 ? waitTime : 0,
+          visit: visit
         });
       });
     });

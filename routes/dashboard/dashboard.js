@@ -5,7 +5,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', Auth.isLoggedIn, function(req, res, next) {
-  Utils.getVisitsBeingTreated(function(err, visitsBeingTreated) {
+  Utils.getVisitsBeingTreated(req.user.hospital, function(err, visitsBeingTreated) {
     if (err) {
       console.log(JSON.stringify(err, null, 2));
 
@@ -15,7 +15,7 @@ router.get('/', Auth.isLoggedIn, function(req, res, next) {
       });
     }
 
-    Utils.getQueueWithWaitTimes(function(err, queue) {
+    Utils.getQueueWithWaitTimes(req.user.hospital, function(err, queue) {
       if (err) {
         console.log(JSON.stringify(err, null, 2));
 
@@ -24,7 +24,7 @@ router.get('/', Auth.isLoggedIn, function(req, res, next) {
           msg : "Uh oh, something went wrong! Please try again later."
         });
       }
-      
+
       res.render('dashboard/dashboard', {
         queue: queue,
         visitsBeingTreated: visitsBeingTreated
@@ -34,7 +34,7 @@ router.get('/', Auth.isLoggedIn, function(req, res, next) {
 });
 
 router.post('/mark_treated', Auth.isLoggedIn, function(req, res, next) {
-  Utils.markPatientAsTreated(req.body.code, function(err) {
+  Utils.markPatientAsTreated(req.body.code, req.user.hospital, function(err) {
     if (err) {
       console.log(JSON.stringify(err, null, 2));
 

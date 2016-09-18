@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/:code', function(req, res, next) {
-  Utils.getEstimatedWaitTime(req.params.code, function(err, result) {
+  Utils.getEstimatedWaitTime(req.params.code, req.user.hospital, function(err, result) {
     if (err) {
       console.log(err);
       res.send({ err: err })

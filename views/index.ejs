@@ -18,43 +18,75 @@
     <div class= "valign-wrapper">
       <div class="valign container">
 
-        <h1 class="header center red-text text-darken-1"><b>Welcome to ERWatch!</b></h1>
-        <div class="row center">
-          ERWatch gives you an estimated emerge wait time specific to you!
-        </div>
+        <h1 class="header center red-text text-darken-1">
+          <b>Welcome to ERWatch!</b>
+        </h1>
 
-        <div class="row center">
-          <h5 class="header col s12 light">Please enter your patient code:</h5>
-        </div>
+        <% if (hospitals.length > 0) { %>
+          <div class="row center">
+            <div class="col s12">
+              <h5 class="header flow-text">Select a hospital to view the current wait time</h5>
+            </div>
+          </div>
 
+          <div class="row">
+            <div class="col s12 l2"></div>
+            <div class="col s12 l8">
+              <div class="card">
+                <div class="card-content">
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="input-field">
+                        <select class="hospital-select">
+                          <% hospitals.forEach(function(hospital, i) { %>
+                            <option value="<%= hospital._id %>"><%= hospital.name %></option>
+                          <% }); %>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
 
-        <div class="row">
-          <div class="col s3"></div>
-          <div class="col s6">
-            <div class="card white lighten-5">
-              <div class="card-content">
-                <div class="input-field">
-
-                  <input placeholder="123456..." id="code-field" type="text" class="validate">
-                  <label for="first_name">Code</label>
+                  <div class="row">
+                    <div class="center-align col s12">
+                      <div class="small statistic">
+                        <span class="number"><%= waitTime %></span>
+                        <span class="caption flow-text">Minute wait time</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col s4"></div>
+        <% } %>
+
+        <div class="row center">
+          <div class="col s12">
+            <h5 class="header flow-text">Please enter your patient code below to view your estimated wait time:</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 l2"></div>
+          <div class="col s12 l8">
+            <div class="card">
+              <div class="card-content">
+                <div class="input-field">
+                  <label for="code-field">Code</label>
+                  <input placeholder="123456..." id="code-field" name="code-field" type="text" class="validate">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="row center">
-          <a id="submit-button" class="btn-large red darken-1">Get Wait Time</a>
+          <a id="submit-button" class="btn-large red darken-1">Get Your Wait Time</a>
         </div>
-
-
-
 
       </div>
     </div>
   </div>
-
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
