@@ -39,21 +39,43 @@
   line-height: 1;
 }
 
-.statistic .number {
+.large.statistic .number {
   font-size: 30em;
+}
+
+.small.statistic .number {
+  font-size: 5em;
+}
+
+.large.statistic .caption {
+  font-size: 3em;
+  font-weight: 500;
+}
+
+.small.statistic .caption {
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
+.large.statistic .foot {
+  font-size: 2em;
+}
+
+.small.statistic .foot {
+  font-size: 1em;
+}
+
+.statistic .number {
   font-weight: 700;
   margin: 0px;
   display: block;
 }
 
 .statistic .caption {
-  font-weight: 500;
-  font-size: 3em;
-  display:block;
+  display: block;
 }
 
 .statistic .foot {
   font-weight: 300;
-  font-size: 2em;
   display:block;
 }

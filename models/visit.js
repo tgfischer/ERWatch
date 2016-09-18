@@ -10,6 +10,7 @@ var VisitSchema = new Schema({
   totalWaitTime     : String,
   timeUntilFinished : String,
   patient           : { type: Schema.Types.ObjectId, ref: 'Patient' },
+  hospital          : { type: Schema.Types.ObjectId, ref: 'Hospital' },
   condition         : { type: String, ref: 'Condition' }
 }, {
   collection: 'visits'

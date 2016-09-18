@@ -25,7 +25,7 @@ router.post('/', Auth.isLoggedIn, function(req, res, next) {
       });
     }
 
-    Utils.getVisitsBeingTreated(function(err, visitsBeingTreated) {
+    Utils.getVisitsBeingTreated(req.user.hospital, function(err, visitsBeingTreated) {
       var visit = new Visit();
       visit.code = Math.random().toString(36).substr(2, 8).toUpperCase();
       visit.arrivalTime = Date.now();
@@ -55,6 +55,7 @@ router.post('/', Auth.isLoggedIn, function(req, res, next) {
         }
 
         visit.condition = condition._id;
+        visit.hospital = req.user.hospital._id;
 
         visit.save(function(err) {
           if (err) {
