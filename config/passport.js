@@ -54,19 +54,7 @@ module.exports = function(passport) {
               return done(null, false, req.flash('message', 'That email is already taken.'));
             }, 3000);
           } else {
-            var hospital = new Hospital();
-            hospital.name = req.body.hospitalName;
-            hospital.street = req.body.hospitalStreet;
-            hospital.city = req.body.hospitalCity;
-            hospital.postalCode = req.body.hospitalPostalCode;
-            hospital.province = req.body.hospitalProvince;
-
-            hospital.save(function(err) {
-              if (err) {
-                throw err;
-              }
-
-              newNurse.hospital = hospital._id;
+              newNurse.hospital = req.body.hospital;
 
               // Save the nurse
               newNurse.save(function(err) {
@@ -76,7 +64,6 @@ module.exports = function(passport) {
 
                 return done(null, newNurse);
               });
-            });
           }
         });
       });

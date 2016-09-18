@@ -40,29 +40,29 @@
 }
 
 .large.statistic .number {
-  font-size: 30em;
+  font-size: 30em !important;
 }
 
 .small.statistic .number {
-  font-size: 5em;
+  font-size: 5em !important;
 }
 
 .large.statistic .caption {
-  font-size: 3em;
-  font-weight: 500;
+  font-size: 3em !important;
+  font-weight: 500 !important;
 }
 
 .small.statistic .caption {
-  font-size: 1.25em;
-  font-weight: 400;
+  font-size: 1.25em !important;
+  font-weight: 400 !important;
 }
 
 .large.statistic .foot {
-  font-size: 2em;
+  font-size: 2em !important;
 }
 
 .small.statistic .foot {
-  font-size: 1em;
+  font-size: 1em !important;
 }
 
 .statistic .number {

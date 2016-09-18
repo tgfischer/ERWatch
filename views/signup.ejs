@@ -42,14 +42,19 @@
               </div>
             </div>
 
-
+            <% if (hospitals.length > 0) { %>
               <div class="row">
                 <div class="input-field col s12">
-                  <label for="hospitalName">Hospital Name</label>
-                  <input id="hospitalName" name="hospitalName" type="text" class="validate">
+                  <div class="input-field">
+                    <select class="hospital-select" name="hospital">
+                      <% hospitals.forEach(function(hospital, i) { %>
+                        <option value="<%= hospital._id %>"><%= hospital.name %></option>
+                      <% }); %>
+                    </select>
+                  </div>
                 </div>
               </div>
-
+            <% } else { %>
               <div class="row">
                 <div class="input-field col s12">
                   <label for="hospitalStreet">Street</label>
@@ -83,7 +88,7 @@
                   </select>
                 </div>
               </div>
-
+            <% } %>
 
             <input class="submit btn red darken-1" type="submit" />
           </form>
