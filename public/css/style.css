@@ -42,7 +42,7 @@ margin-right: 10px;
 
 /* label color */
    .input-field label {
-     color: red !important;
+     color: #000 !important;
    }
    /* label focus color */
    .input-field input[type=text]:focus + label {
