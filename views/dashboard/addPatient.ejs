@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
   <title>Add Patient</title>
-  
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   <link href="/css/style.css" rel="stylesheet">
@@ -18,7 +18,7 @@
         <div class="card white lighten-5">
           <div class="card-content">
             <div class="row">
-              <form class="add-patient col s12 center" action="/dashboard/add-patient" method="POST">
+              <form class="add-patient col s12" action="/dashboard/add-patient" method="POST">
                   <p class="flow-text">Patient Admission Form</p>
 
                 <!-- //////// row 1 ////////-->
@@ -100,8 +100,10 @@
                 </div>
 
                 <!-- //////// Add Patient /////////-->
-                <div class="row center">
-                  <input id="submit-button" class="submit btn-large red darken-1" type="submit" value="Add Patient" />
+                <div class="row margin-bottom-0">
+                  <div class="col s12 input-field">
+                    <input id="submit-button" class="submit btn-large red darken-1" type="submit" value="Add Patient" />
+                  </div>
                 </div>
 
               </form>
