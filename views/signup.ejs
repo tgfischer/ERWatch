@@ -42,17 +42,7 @@
               </div>
             </div>
 
-            <% if (hospitals.length) { %>
-              <div class="row">
-                <div class="input-field col s12">
-                  <select name="hospital">
-                    <% hospitals.forEach(function(hospital, i) { %>
-                      <option value="hospital._id"><%= hospital.name %></option>
-                    <% }); %>
-                  </select>
-                </div>
-              </div>
-            <% } else { %>
+
               <div class="row">
                 <div class="input-field col s12">
                   <label for="hospitalName">Hospital Name</label>
@@ -93,7 +83,7 @@
                   </select>
                 </div>
               </div>
-            <% } %>
+
 
             <input class="submit btn red darken-1" type="submit" />
           </form>
@@ -105,6 +95,7 @@
 
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script src="/js/scripts.js"></script>
   <script>
   $(document).ready(function() {
     $('select').material_select();
