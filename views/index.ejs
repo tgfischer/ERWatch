@@ -39,7 +39,7 @@
                       <div class="input-field">
                         <select class="hospital-select">
                           <% hospitals.forEach(function(hospital, i) { %>
-                            <option value="<%= hospital._id %>"><%= hospital.name %></option>
+                            <option value="<%= hospital._id %>"><%= hospital.name %> (<%= hospital.city %>, <%= hospital.province %>)</option>
                           <% }); %>
                         </select>
                       </div>
@@ -74,7 +74,7 @@
 
         <div class="row center">
           <div class="col s12">
-            <h5 class="header flow-text">Please enter your patient code below to view your estimated wait time:</h5>
+            <h5 class="header flow-text">Please enter your patient code below to view YOUR estimated wait time:</h5>
           </div>
         </div>
 
