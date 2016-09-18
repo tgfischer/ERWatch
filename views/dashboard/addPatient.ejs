@@ -9,50 +9,114 @@
 <body>
   <% include ../common/nav %>
 
+  <div class="section no-pad-bot full-page" id="index-banner">
+    <div class= "valign-wrapper">
+      <div class="valign container">
+        <div class="card white lighten-5">
+          <div class="card-content">
+            <div class="row">
+              <form class = "col s12 center" action="/dashboard/add-patient" method="POST">
 
-  <div class="row">
-    <form action="/dashboard/add-patient" method="POST">
-      <div class="col s6">
-        <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
+
+                <!-- //////// row 1 ////////-->
+                <div class = "row">
+                  <div class="col s6">
+                    <input class="firstName" type="text" name="firstName" placeholder="First Name" /><br>
+                  </div>
+                  <div class="col s6">
+                    <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
+                  </div>
+                </div>
+
+                <!-- //////// row 2 ////////-->
+                <div class = "row">
+                  <div class="col s12">
+                    <input class="healthCard" type="text" name="healthCard" placeholder="Health Card #" /><br>
+                  </div>
+
+                </div>
+                <!-- //////// row 3 /////////-->
+                <div class = "row">
+
+                  <div class="col s6">
+                    <input class="birthday" type="date" name="birthday" placeholder="Birthday" /><br>
+                  </div>
+                  <div class="gender col s6" name="gender">
+                    <select>
+                      <option value="" disabled selected>Gender</option>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+
+                  </div>
+
+                </div>
+                <!-- //////// row 4 /////////-->
+                <div class = "row">
+
+                  <div class="col s12">
+                    <input class="conditionName" type="text" name="conditionName" placeholder="Condition Name" /><br>
+                  </div>
+
+                </div>
+
+                <!-- //////// row 5 /////////-->
+                <div class = "row">
+                  <div class="col s6">
+                    <select class="severity" name="conditionSeverity" placeholder="Severity">
+                      <option value="" disabled selected>Severity</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                    </select>
+                  </div>
+
+                  <div class = "col s6">
+                    <input class="waitTime" type="number" name="conditionWaitTime" placeholder="Visit Duration (mins)"/><br>
+                  </div>
+                </div>
+
+                <!-- //////// row 6 /////////-->
+
+                <div class = "row">
+
+                  <div class="col s12">
+                    <textarea class="description" name="description" placeholder="Description"></textarea>
+                  </div>
+
+                </div>
+
+
+                <!-- //////// Add Patient /////////-->
+
+                <div class="row center">
+                  <a id="submit-button" class="submit btn-large red darken-1" type="submit">Add Patient</a>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="col s6">
-        <input class="lastName" type="text" name="lastName" placeholder="Last Name" /><br>
-      </div>
-      <div class="col s6">
-        <input class="healthCard" type="text" name="healthCard" placeholder="Health Card #" /><br>
-      </div>
-
-
-      <div class="input-field col s6" name="gender">
-        <select>
-          <option value="" disabled selected>Choose your option</option>
-          <option value="1">Male</option>
-          <option value="2">Female</option>
-          <option value="other">Other</option>
-        </select>
-        <label>Materialize Select</label>
-      </div>
-
-      <br>
-
-      <input class="birthday" type="date" name="birthday" placeholder="Birthday" /><br>
-      <input class="conditionName" type="text" name="conditionName" placeholder="Condition Name" /><br>
-      <textarea class="description" name="description" placeholder="Description"></textarea>
-      <select class="severity" name="conditionSeverity">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-      </select><br>
-      <input class="waitTime" type="number" name="conditionWaitTime" /><br>
-      <input class="submit" type="submit" />
-    </form>
+    </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('select').material_select();
+    Materialize.updateTextFields();
+  });
+  </script>
 </body>
 </html>
