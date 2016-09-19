@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var sanitizer = require('sanitizer');
-var Nurse = require('../models/Nurse');
+var Nurse = require('../models/nurse');
 var Hospital = require('../models/hospital');
 var Auth = require('../utils/Auth');
 
