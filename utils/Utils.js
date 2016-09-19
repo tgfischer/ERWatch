@@ -84,7 +84,8 @@ var Utils = {
           return a.condition.getAvgWaitTime() - a.getTimeDifference() < b.condition.getAvgWaitTime() - b.getTimeDifference();
         })[0];
 
-        waitTime += treated.condition.getAvgWaitTime() - treated.getTimeDifference();
+        var timeUntilFinished = treated.condition.getAvgWaitTime() - treated.getTimeDifference();
+        waitTime += timeUntilFinished > 0 ? timeUntilFinished : 0;
 
         return next(null, {
           waitTime: waitTime > 0 ? waitTime : 0,
